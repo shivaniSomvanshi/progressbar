@@ -9,7 +9,7 @@
 
 .progressBar{
     display: flex;
-    margin: 79px 0 0 78px;
+    margin: 79px 0 0 55px;
     position: relative;
     /* width: 250px; */
     /* border-radius: 50%; */
@@ -33,4 +33,9 @@
     position: absolute;
     top:38px;
     left: 40px;
+}
+
+.progressBar p{
+    transform: translateY(-23px);
+    margin-right: 5px;
 }

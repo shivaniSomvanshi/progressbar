@@ -4,10 +4,10 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 function AppOne(props) {
     const tabs =[
-        {tabColor: '#75cfb8', toolContent:'Enabled', toolCount: '2'},
+        {tabColor: '#75cfb8', toolContent:'Enabled', toolCount: '6'},
         {tabColor: '#ffc75f', toolContent:'Disabled', toolCount: '2'},
-        {tabColor: '#1f6f8b', toolContent:'Draft', toolCount: '2'},
-        {tabColor: 'pink', toolContent:'Draft', toolCount: '2'},
+        {tabColor: '#1f6f8b', toolContent:'Draft', toolCount: '1'},
+        {tabColor: 'pink', toolContent:'Draft', toolCount: '3'},
     ]
     const[toolContent, setToolContent]=useState(null);
     const[dotcolor, setDotColor]=useState(null);
@@ -54,12 +54,13 @@ function AppOne(props) {
                     <div className={tab.tabColor} onMouseEnter={(event)=>mouseEnterHandler(event, index)} onMouseLeave={()=>setToolContent(null)} style= {{backgroundColor: widthsize==0?'#c7cfb7': `${tab.tabColor}`, height: '8px', borderRadius: `${styling}`, color: 'transparent', width: widthsize==0?'100px': `${300*(tab.toolCount)/widthsize}`+ 'px'}}></div>
                     </div>)})}
     return (
-    <div>
+    <div style={{border: '1px solid red'}}>
             <div className='tagPart' style={{display: `${toolContent?'block': 'none'}`, transform: `translate(${shifting}px, 0px)` }}>
                     <div className='tool'><span><FiberManualRecordIcon style={{color:`${dotcolor}`, height: '15px', width: '15px', paddingTop: '5px'}}/></span>{' '+ `${toolcount}`+ ' ' + `${toolContent}`}</div>
                     <div className='tip'></div>
             </div>        
             <div className='progressBar'>
+                <p>{widthsize}</p>
                 {displayTab()}
             </div>
     </div>
