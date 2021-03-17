@@ -1,22 +1,25 @@
-.tool{
+.body{
+    padding: 100px;
+}.tool{
     background-color: #555555;
     color: white;
     height: 25px;
-    width: 170px;
+    width: 130px;
     transform: translateX(-50px);
     padding: 2px 0 5px 45px;
 }
 
 .progressBar{
     display: flex;
-    margin: 79px 0 0 55px;
-    position: relative;
-    /* width: 250px; */
-    /* border-radius: 50%; */
-    /* border: 1px solid red; */
+    position: absolute;
+    bottom: 0rem;
+    left: 2.7%;
+    /* margin-top: 0px; */
+    height: 8px;
 }
+
 .bar{
-    height: 10px;
+    margin-top: 0px;
 }
 
 .tip{
@@ -31,11 +34,17 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    top:38px;
-    left: 40px;
+    bottom: 7px;
 }
 
 .progressBar p{
     transform: translateY(-23px);
     margin-right: 5px;
+}
+.parentDiv{
+    /* border: 2px solid red; */
+    margin: 40px;
+    position: relative;
+    height: 5px;
+    width: 500px
 }

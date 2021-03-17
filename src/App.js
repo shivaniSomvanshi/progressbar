@@ -6,8 +6,9 @@ function AppOne(props) {
     const tabs =[
         {tabColor: '#75cfb8', toolContent:'Enabled', toolCount: '6'},
         {tabColor: '#ffc75f', toolContent:'Disabled', toolCount: '2'},
-        {tabColor: '#1f6f8b', toolContent:'Draft', toolCount: '1'},
+        {tabColor: '#1f6f8b', toolContent:'Draft', toolCount: '0'},
         {tabColor: 'pink', toolContent:'Draft', toolCount: '3'},
+        {tabColor: 'green', toolContent:'Draft', toolCount: '8'},
     ]
     const[toolContent, setToolContent]=useState(null);
     const[dotcolor, setDotColor]=useState(null);
@@ -30,11 +31,11 @@ function AppOne(props) {
             for(j=0; j<=i-1; j++){
                test=test+parseInt(tabs[j].toolCount);
             }
-            setShifting((300*(tabs[i].toolCount)/(2*widthsize) + 300*(test)/(widthsize)));
+            setShifting((200*(tabs[i].toolCount)/(2*widthsize) + 200*(test)/(widthsize)));
             console.log(shifting);
         }
         if(i==0){
-            setShifting(300*(tabs[i].toolCount)/(2*widthsize));
+            setShifting(200*(tabs[i].toolCount)/(2*widthsize));
         }
     }
     const displayTab=()=>{
@@ -51,10 +52,10 @@ function AppOne(props) {
             }
             return (
                     <div className='bar'>
-                    <div className={tab.tabColor} onMouseEnter={(event)=>mouseEnterHandler(event, index)} onMouseLeave={()=>setToolContent(null)} style= {{backgroundColor: widthsize==0?'#c7cfb7': `${tab.tabColor}`, height: '8px', borderRadius: `${styling}`, color: 'transparent', width: widthsize==0?'100px': `${300*(tab.toolCount)/widthsize}`+ 'px'}}></div>
+                    <div className={tab.tabColor} onMouseEnter={(event)=>mouseEnterHandler(event, index)} onMouseLeave={()=>setToolContent(null)} style= {{backgroundColor: widthsize==0?'#c7cfb7': `${tab.tabColor}`, height: '8px', borderRadius: `${styling}`, color: 'transparent', width: widthsize==0?'100px': `${200*(tab.toolCount)/widthsize}`+ 'px'}}></div>
                     </div>)})}
     return (
-    <div style={{border: '1px solid red'}}>
+    <div className='parentDiv'>
             <div className='tagPart' style={{display: `${toolContent?'block': 'none'}`, transform: `translate(${shifting}px, 0px)` }}>
                     <div className='tool'><span><FiberManualRecordIcon style={{color:`${dotcolor}`, height: '15px', width: '15px', paddingTop: '5px'}}/></span>{' '+ `${toolcount}`+ ' ' + `${toolContent}`}</div>
                     <div className='tip'></div>
