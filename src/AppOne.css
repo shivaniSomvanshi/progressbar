@@ -1,0 +1,36 @@
+.tool{
+    background-color: #555555;
+    color: white;
+    height: 25px;
+    width: 170px;
+    transform: translateX(-50px);
+    padding: 2px 0 5px 45px;
+}
+
+.progressBar{
+    display: flex;
+    margin: 79px 0 0 78px;
+    position: relative;
+    /* width: 250px; */
+    /* border-radius: 50%; */
+    /* border: 1px solid red; */
+}
+.bar{
+    height: 10px;
+}
+
+.tip{
+  content:'';
+  height: 10px;
+  width: 10px;
+  background-color: #555555;
+  transform: rotate(45deg) translateY(-28px) translateX(20px);
+}
+
+.tagPart{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:10.5%;
+    left: 40px;
+}
