@@ -1,55 +1,68 @@
-import { useState } from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
-function App() {
-  const [green, setGreen]= useState('5');
-  const [yellow, setYellow]= useState('2');
-  const [blue, setBlue]= useState('3');
-  const [width, setWidth]= useState('10');
-  const [target, setTarget]= useState(null);
+function AppOne(props) {
+    const tabs =[
+        {tabColor: '#75cfb8', toolContent:'Enabled', toolCount: '2'},
+        {tabColor: '#ffc75f', toolContent:'Disabled', toolCount: '2'},
+        {tabColor: '#1f6f8b', toolContent:'Draft', toolCount: '2'},
+        {tabColor: 'pink', toolContent:'Draft', toolCount: '2'},
+    ]
+    const[toolContent, setToolContent]=useState(null);
+    const[dotcolor, setDotColor]=useState(null);
+    const[toolcount, setToolCount]=useState(null);
+    const[shifting, setShifting]= useState(null);
+    let widthsize= 0;
+    let tabsLength= tabs.length;
+    tabs.map((tab)=>{
+        widthsize = widthsize + +tab.toolCount;
+    })
 
-  let tagsChange= {
-    value:null,
-    status:null,
-    position: 0
-  }
-  let tipChange={
-    position: 0
-  }
-
-  let dotcolor= null;
-  if(target=='green'){
-    tagsChange.value=green;
-    tagsChange.status='enabled';
-    tagsChange.position='0px';
-    tipChange.position='-100px';
-    dotcolor= '#75cfb8';
-  }else if(target=='yellow'){
-    tagsChange.value=yellow;
-    tagsChange.status='disabled';
-    tagsChange.position='100px';
-    dotcolor='#ffc75f';
-  }else{
-    tagsChange.value=blue;
-    tagsChange.status='draft';
-    tagsChange.position='170px';
-    dotcolor='#1f6f8b';
-  }
-  return (
-    <div className="app">
-      <div className='tagPart'>
-        <div  style={{position:'relative', left: `${tagsChange.position}`}} className='tag'><span><FiberManualRecordIcon style={{color:`${dotcolor}`, height: '15px', width: '15px', paddingTop: '5px'}}/></span>{`${tagsChange.value} ${tagsChange.status}`}</div>
-        {/* <div  style={{position:'relative', left: `${tagsChange.position}`}} className='tag'>{`${tagsChange.value} ${tagsChange.status}`}</div> */}
-         <div style={{position:'relative', left: `${tipChange.position}`, top:'25px'}} className='tip'></div>
-      </div>
-      <div className='bar'>
-          <div className='green' onMouseEnter={(e)=>{setTarget(e.target.className)}} style={{width: `${250*green/width}`+ 'px'}}>GREEN</div>
-          <div className='yellow' onMouseEnter={(e)=>{setTarget(e.target.className)}} style={{width: `${250*yellow/width}`+ 'px'}}>YELLOW</div>
-          <div className='blue' onMouseEnter={(e)=>{setTarget(e.target.className)}}style={{width: `${250*blue/width}`+ 'px'}}>BLUE</div>
-      </div>
+    const mouseEnterHandler=(e, i)=>{
+        if(widthsize){
+        setToolCount(`${tabs[i].toolCount}`);
+        setToolContent(`${tabs[i].toolContent}`);
+        setDotColor(`${e.target.className}`);
+     }
+        if(i!==0){
+            let j, test=0;
+            for(j=0; j<=i-1; j++){
+               test=test+parseInt(tabs[j].toolCount);
+            }
+            setShifting((300*(tabs[i].toolCount)/(2*widthsize) + 300*(test)/(widthsize)));
+            console.log(shifting);
+        }
+        if(i==0){
+            setShifting(300*(tabs[i].toolCount)/(2*widthsize));
+        }
+    }
+    const displayTab=()=>{
+        return tabs.map((tab, index)=>{
+            let styling= null;
+            if(index==0){
+                styling='250px 0 0 250px';
+            }
+            else if(index==tabsLength-1){
+                styling='0 250px 250px 0'
+            }
+            else{
+                styling='0px'
+            }
+            return (
+                    <div className='bar'>
+                    <div className={tab.tabColor} onMouseEnter={(event)=>mouseEnterHandler(event, index)} onMouseLeave={()=>setToolContent(null)} style= {{backgroundColor: widthsize==0?'#c7cfb7': `${tab.tabColor}`, height: '8px', borderRadius: `${styling}`, color: 'transparent', width: widthsize==0?'100px': `${300*(tab.toolCount)/widthsize}`+ 'px'}}></div>
+                    </div>)})}
+    return (
+    <div>
+            <div className='tagPart' style={{display: `${toolContent?'block': 'none'}`, transform: `translate(${shifting}px, 0px)` }}>
+                    <div className='tool'><span><FiberManualRecordIcon style={{color:`${dotcolor}`, height: '15px', width: '15px', paddingTop: '5px'}}/></span>{' '+ `${toolcount}`+ ' ' + `${toolContent}`}</div>
+                    <div className='tip'></div>
+            </div>        
+            <div className='progressBar'>
+                {displayTab()}
+            </div>
     </div>
-  );
-}
+    );}
 
-export default App;
+export default AppOne;

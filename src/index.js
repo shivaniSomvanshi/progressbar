@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AppOne from './AppOne';
-import StatusTags from './StatusTags';
+import App from './App';
+// import StatusTags from './StatusTags';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StatusTags/>
-    <AppOne />
+    {/* <StatusTags/> */}
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
